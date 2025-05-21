@@ -69,7 +69,7 @@ struct HomeView: View {
 
                             // Responsive layout that chooses between horizontal or wrapped layout
                             ViewThatFits(in: .horizontal) {
-                                HStack(spacing: 12) {
+                                HStack(spacing: 9) {
                                     tyrePicker(title: "Width", selection: $tyreFilters.selectedWidth, options: tyreFilters.widths)
                                     tyrePicker(title: "Profile", selection: $tyreFilters.selectedProfile, options: tyreFilters.profiles)
                                     tyrePicker(title: "Rim Size", selection: $tyreFilters.selectedRimSize, options: tyreFilters.rimSizes)
@@ -206,7 +206,7 @@ struct HomeView: View {
             .background(Color.gray.opacity(0.2))
             .cornerRadius(8)
         }
-        .frame(minWidth: 71, maxWidth: .infinity)
+        .frame(minWidth: 74, maxWidth: .infinity)
     }
     
     /// Loads default tyres if none exist and fetches tyre data from the database
