@@ -64,7 +64,7 @@ struct BasketView: View {
                                             }
                                         )
                                         .frame(maxWidth: .infinity)
-                                        .padding(.horizontal)
+                                        .padding(.horizontal, 20)
                                     }
                                 }
                                 .padding(.top)
@@ -85,7 +85,7 @@ struct BasketView: View {
                                         .font(.title3)
                                         .fontWeight(.bold)
                                 }
-                                .padding(.horizontal)
+                                .padding(.horizontal, 20)
                                 .padding(.top, 16)
                                 .padding(.bottom, 16)
 
@@ -100,8 +100,8 @@ struct BasketView: View {
                                             .background(Color(red: 8 / 255, green: 31 / 255, blue: 92 / 255)) // #081F5C
                                             .foregroundColor(.white)
                                             .cornerRadius(10)
-                                            .padding(.horizontal)
                                     }
+                                    .padding(.horizontal, 20)
                                     .padding(.top, 16)
                                     .padding(.bottom, 16)
                                 } else {
@@ -124,7 +124,7 @@ struct BasketView: View {
                                                         Color(UIColor.secondaryLabel)
                                                 )
                                         )
-                                        .padding(.horizontal)
+                                        .padding(.horizontal, 20)
                                         .padding(.top, 16)
                                         .padding(.bottom, 16)
                                 }

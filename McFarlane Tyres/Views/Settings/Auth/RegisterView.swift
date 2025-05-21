@@ -138,7 +138,7 @@ struct RegisterView: View {
 
                     Spacer()
                 }
-                .padding(.horizontal)
+                .padding(.horizontal, 14)
             }
             .ignoresSafeArea(.keyboard, edges: .bottom)
         }

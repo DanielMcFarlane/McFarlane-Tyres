@@ -79,7 +79,7 @@ struct ChangePasswordView: View {
 
                 Spacer()
             }
-            .padding(.horizontal)
+            .padding(.horizontal, 14)
             .ignoresSafeArea(.keyboard)
         }
         .onTapGesture {

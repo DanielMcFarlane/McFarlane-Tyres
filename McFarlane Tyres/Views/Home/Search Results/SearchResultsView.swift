@@ -55,7 +55,7 @@ struct SearchResultsView: View {
                                         ForEach(sortedTyres, id: \.id) { tyre in
                                             SearchCard(tyre: tyre, showPopUp: showPopUpNotification)
                                                 .frame(maxWidth: .infinity)
-                                                .padding(.horizontal)
+                                                .padding(.horizontal, 20)
                                         }
                                     }
                                     .padding(.top)
@@ -80,6 +80,7 @@ struct SearchResultsView: View {
                                 .fontWeight(.medium)
                         }
                         .padding()
+                        .frame(maxWidth: UIScreen.main.bounds.width * 0.9)
                         .background(colorScheme == .light ? Color.black.opacity(0.7) : Color(UIColor.systemGray6).opacity(0.7))
                         .cornerRadius(10)
                         .padding(.bottom, 80)
@@ -143,7 +144,7 @@ struct SearchResultsView: View {
              profile: "65",
              rimSize: "15",
              brand: "Goodyear",
-             model: "EfficientGrip",
+             model: "EfficientGrip Performance",
              speedRating: "H",
              price: 74.50,
              isWinter: true,

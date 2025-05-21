@@ -28,14 +28,13 @@ struct AddUserView: View {
     var body: some View {
         ZStack {
              ScrollView {
-                VStack(spacing: 30) {
-                    Spacer().frame(height: 154)
-
+                VStack(spacing: 20) {
                     // Title
                     Text("Add User")
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .foregroundColor(Color(UIColor.label))
+                        .padding(.top, 40)
 
                     // Email text field
                     TextField("Email address", text: $email)
@@ -162,7 +161,7 @@ struct AddUserView: View {
 
                     Spacer()
                 }
-                .padding(.horizontal)
+                .padding(.horizontal, 14)
             }
             .ignoresSafeArea(.keyboard, edges: .bottom)
         }

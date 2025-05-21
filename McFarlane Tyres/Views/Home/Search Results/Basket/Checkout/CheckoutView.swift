@@ -92,7 +92,6 @@ struct CheckoutView: View {
                             .foregroundColor(.white)
                             .cornerRadius(10)
                     }
-                    .padding(.horizontal)
                     .padding(.bottom, 20)
                     .alert("Checkout Error", isPresented: $showError) {
                         Button("OK", role: .cancel) { }
@@ -100,7 +99,7 @@ struct CheckoutView: View {
                         Text(errorMessage ?? "Something went wrong.")
                     }
                 }
-                .padding()
+                .padding(.horizontal, 14)
             }
             .background(Color(UIColor.systemGroupedBackground).ignoresSafeArea())
             .ignoresSafeArea(.keyboard, edges: .top)
@@ -121,7 +120,7 @@ struct CheckoutView: View {
 
     // MARK: - Details Cards
 
-    // Custeomer details card
+    // Customer details card
     private var customerDetailsCard: some View {
         VStack(alignment: .leading, spacing: 15) {
             // Title

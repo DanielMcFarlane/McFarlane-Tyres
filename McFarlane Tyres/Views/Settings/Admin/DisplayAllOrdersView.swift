@@ -52,7 +52,6 @@ struct DisplayAllOrdersView: View {
                                             .font(.title2)
                                             .fontWeight(.semibold)
                                             .frame(maxWidth: .infinity, alignment: .leading)
-                                            .padding(.horizontal)
 
                                         VStack(alignment: .leading, spacing: 16) {
                                             // Order lines grouped by order number
@@ -118,7 +117,6 @@ struct DisplayAllOrdersView: View {
                                         .background(Color(UIColor.systemGray6))
                                         .cornerRadius(12)
                                         .shadow(color: .black.opacity(0.12), radius: 5, x: 0, y: 2)
-                                        .padding(.horizontal)
                                     }
                                 }
 
@@ -130,7 +128,6 @@ struct DisplayAllOrdersView: View {
                                             .font(.title2)
                                             .fontWeight(.semibold)
                                             .frame(maxWidth: .infinity, alignment: .leading)
-                                            .padding(.horizontal)
 
                                         VStack(alignment: .leading, spacing: 16) {
                                             LazyVStack(spacing: 16) {
@@ -197,13 +194,13 @@ struct DisplayAllOrdersView: View {
                                         .background(Color(UIColor.systemGray6))
                                         .cornerRadius(12)
                                         .shadow(color: .black.opacity(0.12), radius: 5, x: 0, y: 2)
-                                        .padding(.horizontal)
                                     }
                                 }
                             }
                         }
                         .padding(.bottom, 16)
                         .padding(.top, 16)
+                        .padding(.horizontal, 14)
                     }
                 }
             }

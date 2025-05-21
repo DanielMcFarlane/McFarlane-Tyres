@@ -90,7 +90,7 @@ struct TermsCardView: View {
         .background(Color(UIColor.systemGray6))
         .cornerRadius(12)
         .shadow(color: .black.opacity(0.12), radius: 5, x: 0, y: 2)
-        .padding(.horizontal)
+        .padding(.horizontal, 20)
     }
 }
 

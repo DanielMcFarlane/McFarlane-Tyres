@@ -107,7 +107,7 @@ struct OrderCategoryView: View {
                 .font(.title2)
                 .fontWeight(.semibold)
                 .padding(.top, 16)
-                .padding(.horizontal)
+                .padding(.horizontal, 20)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .background(Color(UIColor.systemGroupedBackground))
 
@@ -121,7 +121,7 @@ struct OrderCategoryView: View {
 
                         OrderCard(order: order)
                     }
-                    .padding(.horizontal)
+                    .padding(.horizontal, 20)
                     .padding(.top, 12)
                 }
             }
