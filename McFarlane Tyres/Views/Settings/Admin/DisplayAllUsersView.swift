@@ -54,6 +54,7 @@ struct DisplayAllUsersView: View {
                         .onDelete(perform: confirmDelete)
                     }
                     .listStyle(InsetGroupedListStyle())
+                    .padding(.horizontal, -6)
                 }
             }
             .navigationTitle("All Users")
@@ -73,7 +74,7 @@ struct DisplayAllUsersView: View {
         }
     }
 
-    // MARK: - Hewpful Functions
+    // MARK: - Helper Functions
 
     /// Fetches all users from the database
     private func fetchAllUsers() {

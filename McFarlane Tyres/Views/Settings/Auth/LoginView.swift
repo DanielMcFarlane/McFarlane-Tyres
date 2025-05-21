@@ -115,7 +115,7 @@ struct LoginView: View {
                     }
                     Spacer().frame(height: 24)
                 }
-                .padding(.horizontal)
+                .padding(.horizontal, 14)
                 .ignoresSafeArea(.keyboard)
             }
         }

@@ -66,36 +66,19 @@ struct HomeView: View {
                                 .fontWeight(.bold)
                                 .foregroundColor(Color(UIColor.label))
                                 .frame(maxWidth: .infinity, alignment: .center)
-
-                            // Responsive layout that chooses between horizontal or wrapped layout
-                            ViewThatFits(in: .horizontal) {
-                                HStack(spacing: 9) {
-                                    tyrePicker(title: "Width", selection: $tyreFilters.selectedWidth, options: tyreFilters.widths)
-                                    tyrePicker(title: "Profile", selection: $tyreFilters.selectedProfile, options: tyreFilters.profiles)
-                                    tyrePicker(title: "Rim Size", selection: $tyreFilters.selectedRimSize, options: tyreFilters.rimSizes)
-                                    tyrePicker(title: "Speed", selection: $tyreFilters.selectedSpeed, options: tyreFilters.speedRatings)
-                                }
-                                
-                                // Fallback if it doesn't fit, idk if there's a better way to do this
-                                VStack(spacing: 12) {
-                                    HStack(spacing: 12) {
-                                        tyrePicker(title: "Width", selection: $tyreFilters.selectedWidth, options: tyreFilters.widths)
-                                        tyrePicker(title: "Profile", selection: $tyreFilters.selectedProfile, options: tyreFilters.profiles)
-                                    }
-                                    
-                                    HStack(spacing: 12) {
-                                        tyrePicker(title: "Rim Size", selection: $tyreFilters.selectedRimSize, options: tyreFilters.rimSizes)
-                                        tyrePicker(title: "Speed", selection: $tyreFilters.selectedSpeed, options: tyreFilters.speedRatings)
-                                    }
-                                }
+                            
+                            // Tyre picker drop downs
+                            HStack(spacing: 9) {
+                                tyrePicker(title: "Width", selection: $tyreFilters.selectedWidth, options: tyreFilters.widths)
+                                tyrePicker(title: "Profile", selection: $tyreFilters.selectedProfile, options: tyreFilters.profiles)
+                                tyrePicker(title: "Rim Size", selection: $tyreFilters.selectedRimSize, options: tyreFilters.rimSizes)
+                                tyrePicker(title: "Speed", selection: $tyreFilters.selectedSpeed, options: tyreFilters.speedRatings)
                             }
-                            .padding(.horizontal, 30)
-                            .padding(.bottom, 6)
-                            .multilineTextAlignment(.center)
                             
                             Divider()
                                 .background(Color.gray)
-                                .padding(.horizontal, 64)
+                                .padding(.horizontal, 44)
+                                .padding(.top, 6)
 
                             // Tyre description image
                             Image(colorScheme == .dark ? "Tyre-Description-Dark-Mode" : "Tyre-Description-Light-Mode")
@@ -113,13 +96,13 @@ struct HomeView: View {
                                     .foregroundColor(.white)
                                     .cornerRadius(12)
                             }
-                            .padding(.horizontal, 10)
+                            .padding(.horizontal, 30)
                         }
                         .padding()
                         .background(.ultraThinMaterial.opacity(0.9))
                         .cornerRadius(12)
                         .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: 2)
-                        .padding(.horizontal)
+                        .padding(.horizontal, 20)
 
                         Divider()
                             .padding(.horizontal, 64)
@@ -206,7 +189,7 @@ struct HomeView: View {
             .background(Color.gray.opacity(0.2))
             .cornerRadius(8)
         }
-        .frame(minWidth: 74, maxWidth: .infinity)
+        .frame(maxWidth: 84)
     }
     
     /// Loads default tyres if none exist and fetches tyre data from the database
