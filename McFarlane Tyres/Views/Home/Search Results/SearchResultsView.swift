@@ -81,7 +81,7 @@ struct SearchResultsView: View {
                         }
                         .padding()
                         .frame(maxWidth: UIScreen.main.bounds.width * 0.9)
-                        .background(colorScheme == .light ? Color.black.opacity(0.7) : Color(UIColor.systemGray6).opacity(0.7))
+                        .background(colorScheme == .light ? Color.black.opacity(0.7) : Color(UIColor.systemGray3).opacity(0.7))
                         .cornerRadius(10)
                         .padding(.bottom, 80)
                     }
