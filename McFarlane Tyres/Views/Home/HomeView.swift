@@ -74,7 +74,8 @@ struct HomeView: View {
                                 tyrePicker(title: "Rim Size", selection: $tyreFilters.selectedRimSize, options: tyreFilters.rimSizes)
                                 tyrePicker(title: "Speed", selection: $tyreFilters.selectedSpeed, options: tyreFilters.speedRatings)
                             }
-                            
+                            .accentColor(.primary)
+
                             Divider()
                                 .background(Color.gray)
                                 .padding(.horizontal, 44)

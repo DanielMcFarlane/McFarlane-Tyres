@@ -173,11 +173,12 @@ struct CheckoutView: View {
 
                     // Date picker for booking date
                     DatePicker("", selection: $bookingDate, in: {
-                        #if DEBUG
-                            ...Date.distantFuture
-                        #else
-                            Date()...
-                        #endif
+//                        #if DEBUG
+//                            ...Date.distantFuture
+//                        #else
+//                            Date()...
+//                        #endif
+                        Date()...
                     }(), displayedComponents: .date)
                         .datePickerStyle(.compact)
                         .labelsHidden()
