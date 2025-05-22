@@ -36,7 +36,7 @@ struct BasketView: View {
 
                             if basketItems.isEmpty {
                                 // Empty basket message
-                                Text("Your basket is empty.")
+                                Text("Your basket is empty")
                                     .font(.title3)
                                     .foregroundColor(.secondary)
                                     .padding()

@@ -61,7 +61,7 @@ struct OrdersView: View {
 
                             if orders.isEmpty {
                                 // No orders view
-                                Text("No orders yet.")
+                                Text("No orders yet")
                                     .font(.headline)
                                     .foregroundColor(.gray)
                                     .padding()

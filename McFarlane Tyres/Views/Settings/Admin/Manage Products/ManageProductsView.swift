@@ -16,126 +16,78 @@ struct ManageProductsView: View {
 
     @Query(sort: [SortDescriptor(\Tyre.rimSize), SortDescriptor(\Tyre.profile), SortDescriptor(\Tyre.width)]) private var tyres: [Tyre]
 
-    @State private var searchRimSize: String = ""
+    @State private var searchBar: String = ""
     @State private var showingAddTyreSheet = false
     @State private var selectedCategory = ""
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 0) {
-                ZStack {
-                    ScrollView {
-                        VStack(spacing: 20) {
-                            HStack {
-                                // Search bar
-                                Image(systemName: "magnifyingglass")
-                                    .foregroundColor(.gray)
-                                TextField("Search by rim size...", text: $searchRimSize)
-                                    .textFieldStyle(PlainTextFieldStyle())
-                                    .keyboardType(.numberPad)
-                            }
-                            .padding()
-                            .background(colorScheme == .light ? Color(.systemGray5) : Color(.systemGray6))
-                            .cornerRadius(8)
-                            .padding(.horizontal)
-                            .padding(.top, 20)
+            List {
+                // Search bar
+                Section {
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(.gray)
+                            .font(.subheadline)
+                        TextField("Search tyres...", text: $searchBar)
+                            .font(.subheadline)
+                            .disableAutocorrection(true)
+                    }
+                    .padding(.vertical, 6)
+                }
 
-                            // Filter tyres
-                            LazyVStack(alignment: .leading, spacing: 16) {
-                                ForEach(filteredTyres.keys.sorted(), id: \.self) { category in
-                                    DisclosureGroup(
-                                        content: {
-                                            // Rim sizes
-                                            ForEach(filteredTyres[category]?.keys.sorted() ?? [], id: \.self) { rimSize in
-                                                DisclosureGroup(
-                                                    content: {
-                                                        // Profiles
-                                                        ForEach(filteredTyres[category]?[rimSize]?.keys.sorted() ?? [], id: \.self) { profile in
-                                                            DisclosureGroup(
-                                                                content: {
-                                                                    // Width
-                                                                    ForEach(filteredTyres[category]?[rimSize]?[profile]?.keys.sorted() ?? [], id: \.self) { speedRating in
-                                                                        DisclosureGroup(
-                                                                            content: {
-                                                                                // Tyres
-                                                                                ForEach(filteredTyres[category]?[rimSize]?[profile]?[speedRating] ?? [], id: \.self) { widthTyres in
-                                                                                    ForEach(widthTyres, id: \.self) { tyre in
-                                                                                        TyreCardView(tyre: tyre)
-                                                                                    }
-                                                                                }
-                                                                            },
-                                                                            label: {
-                                                                                Text("Speed Rating: \(speedRating)")
-                                                                                    .font(.subheadline)
-                                                                                    .foregroundColor(.secondary)
-                                                                                    .padding(.vertical, 4)
-                                                                            }
-                                                                        )
-                                                                        .padding(.leading)
-                                                                    }
-                                                                },
-                                                                label: {
-                                                                    Text("Profile: \(profile)")
-                                                                        .font(.subheadline)
-                                                                        .foregroundColor(.secondary)
-                                                                        .padding(.vertical, 4)
-                                                                }
-                                                            )
-                                                            .padding(.leading)
+                // Show no tyres found message if filteredTyres is empty
+                if filteredTyres.isEmpty {
+                    Text("No tyres found")
+                        .font(.headline)
+                        .foregroundColor(.gray)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .multilineTextAlignment(.center)
+                        .padding()
+                        .listRowBackground(Color.clear)
+                } else {
+                    // Tyre categories - this probably kills performance but it works
+                    ForEach(filteredTyres.keys.sorted(), id: \.self) { category in
+                        Section(header: Text(category).font(.headline)) {
+                            ForEach(filteredTyres[category]?.keys.sorted() ?? [], id: \.self) { rimSize in
+                                DisclosureGroup("Rim Size: \(rimSize)") {
+                                    ForEach(filteredTyres[category]?[rimSize]?.keys.sorted() ?? [], id: \.self) { profile in
+                                        DisclosureGroup("Profile: \(profile)") {
+                                            ForEach(filteredTyres[category]?[rimSize]?[profile]?.keys.sorted() ?? [], id: \.self) { speedRating in
+                                                DisclosureGroup("Speed Rating: \(speedRating)") {
+                                                    ForEach(filteredTyres[category]?[rimSize]?[profile]?[speedRating] ?? [], id: \.self) { widthTyres in
+                                                        ForEach(widthTyres, id: \.self) { tyre in
+                                                            TyreCardView(tyre: tyre)
                                                         }
-                                                    },
-                                                    label: {
-                                                        Text("Rim Size: \(rimSize)")
-                                                            .font(.subheadline)
-                                                            .foregroundColor(.secondary)
-                                                            .padding(.vertical, 4)
                                                     }
-                                                )
-                                                .padding(.leading)
-                                            }
-
-                                            // Add new tyre button
-                                            Button(action: {
-                                                addNewTyre(to: category)
-                                            }) {
-                                                HStack {
-                                                    Spacer()
-                                                    // Add new tyre icon
-                                                    Image(systemName: "plus.circle.fill")
-                                                        .font(.title2)
-                                                        .foregroundColor(.blue)
-
-                                                    // Add new tyre text
-                                                    Text("Add New Tyre")
-                                                        .font(.subheadline)
-                                                        .foregroundColor(.blue)
-                                                    Spacer()
                                                 }
                                             }
-                                            .padding(.vertical, 10)
-                                        },
-                                        label: {
-                                            Text(category)
-                                                .font(.headline)
-                                                .fontWeight(.medium)
-                                                .lineLimit(nil)
-                                                .foregroundColor(.primary)
                                         }
-                                    )
-                                    .padding()
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 12)
-                                            .fill(colorScheme == .light ? Color(.systemBackground) : Color(.systemGray6))
-                                    )
-                                    .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
+                                    }
                                 }
                             }
-                            .padding(.horizontal)
-                            .padding(.bottom, 16)
+
+                            // Add new tyre button
+                            Button(action: {
+                                addNewTyre(to: category)
+                            }) {
+                                HStack {
+                                    Spacer()
+                                    Image(systemName: "plus.circle.fill")
+                                        .font(.body)
+                                        .foregroundColor(.blue)
+                                    Text("Add New Tyre")
+                                        .font(.caption)
+                                        .foregroundColor(.blue)
+                                    Spacer()
+                                }
+                            }
+                            .padding(.vertical, 4)
                         }
                     }
                 }
             }
+            .listStyle(InsetGroupedListStyle())
             .navigationTitle("Manage Products")
             .background(Color(.systemGroupedBackground).ignoresSafeArea())
             .sheet(isPresented: $showingAddTyreSheet) {
@@ -148,38 +100,109 @@ struct ManageProductsView: View {
 
     // MARK: - Helper Functions
 
-    /// Filters and groups tyres based on the search criteria
-    private var filteredTyres: [String: [String: [String: [String: [[Tyre]]]]]] {
-        let filtered = tyres.filter {
-            searchRimSize.isEmpty || "\($0.rimSize)".contains(searchRimSize)
+    /// Filters the list of tyres based on the search bar input
+    private func filterTyres(with search: String) -> [Tyre] {
+        let search = search.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+
+        if search.isEmpty {
+            return tyres
         }
 
-        let groupedByCategory = Dictionary(grouping: filtered, by: { $0.category })
+        func prefixSearch(_ text: String, prefix: String) -> Bool {
+            text.lowercased().hasPrefix(prefix)
+        }
 
-        // Rim sizes
-        return groupedByCategory.mapValues { categoryTyres in
-            let groupedByRimSize = Dictionary(grouping: categoryTyres, by: { $0.rimSize })
+        if search.contains("/") {
+            let filteredSearch = search.replacingOccurrences(of: " ", with: "/")
+            let sizeComponents = filteredSearch.split(separator: "/").map(String.init)
 
-            // Profiles
-            return groupedByRimSize.mapValues { rimSizeTyres in
-                let groupedByProfile = Dictionary(grouping: rimSizeTyres, by: { $0.profile })
+            switch sizeComponents.count {
+            case 4:
+                let (width, profile, rim, speed) = (sizeComponents[0], sizeComponents[1], sizeComponents[2], sizeComponents[3].uppercased())
 
-                // Speed ratings
-                return groupedByProfile.mapValues { profileTyres in
-                    let groupedBySpeedRating = Dictionary(grouping: profileTyres, by: { $0.speedRating })
+                return tyres.filter {
+                    $0.width.hasPrefix(width) &&
+                        $0.profile.hasPrefix(profile) &&
+                        $0.rimSize.hasPrefix(rim) &&
+                        $0.speedRating.uppercased().hasPrefix(speed)
+                }
 
-                    // Widths
-                    return groupedBySpeedRating.mapValues { speedRatingTyres in
-                        let groupedByWidth = Dictionary(grouping: speedRatingTyres, by: { $0.width })
+            case 3:
+                let (width, profile, rim) = (sizeComponents[0], sizeComponents[1], sizeComponents[2])
 
-                        // Filtered array
-                        return groupedByWidth.keys.sorted().map { width in
-                            groupedByWidth[width]?.sorted { $0.price < $1.price } ?? []
-                        }
-                    }
+                return tyres.filter {
+                    $0.width.hasPrefix(width) &&
+                        $0.profile.hasPrefix(profile) &&
+                        $0.rimSize.hasPrefix(rim)
+                }
+
+            case 2:
+                let (width, profile) = (sizeComponents[0], sizeComponents[1])
+
+                return tyres.filter {
+                    $0.width.hasPrefix(width) &&
+                        $0.profile.hasPrefix(profile)
+                }
+
+            case 1:
+                let width = sizeComponents[0]
+
+                return tyres.filter {
+                    $0.width.hasPrefix(width)
+                }
+
+            default:
+                return tyres.filter {
+                    let fullSize = "\($0.width)/\($0.profile)/\($0.rimSize)/\($0.speedRating.uppercased())"
+
+                    return prefixSearch($0.brand, prefix: search) ||
+                        prefixSearch($0.model, prefix: search) ||
+                        prefixSearch(fullSize, prefix: search) ||
+                        prefixSearch($0.rimSize, prefix: search) ||
+                        prefixSearch($0.profile, prefix: search) ||
+                        prefixSearch($0.speedRating, prefix: search) ||
+                        prefixSearch($0.width, prefix: search) ||
+                        (search.contains("winter") && $0.isWinter)
                 }
             }
+        } else {
+            return tyres.filter {
+                prefixSearch($0.brand, prefix: search) ||
+                    prefixSearch($0.model, prefix: search) ||
+                    $0.width.hasPrefix(search) ||
+                    $0.profile.hasPrefix(search) ||
+                    $0.rimSize.hasPrefix(search) ||
+                    prefixSearch($0.speedRating, prefix: search) ||
+                    (search.contains("winter") && $0.isWinter)
+            }
         }
+    }
+
+    /// Group tyres into a nested dictionary
+    private func groupTyres(_ tyres: [Tyre]) -> [String: [String: [String: [String: [[Tyre]]]]]] {
+        Dictionary(grouping: tyres, by: \.category)
+            .mapValues { categoryGroup in
+                Dictionary(grouping: categoryGroup, by: \.rimSize)
+                    .mapValues { rimGroup in
+                        Dictionary(grouping: rimGroup, by: \.profile)
+                            .mapValues { profileGroup in
+                                Dictionary(grouping: profileGroup, by: \.speedRating)
+                                    .mapValues { speedGroup in
+                                        Dictionary(grouping: speedGroup, by: \.width)
+                                            .keys.sorted().map { width in
+                                                Dictionary(grouping: speedGroup, by: \.width)[width]?.sorted(by: { $0.price < $1.price }) ?? []
+                                            }
+                                    }
+                            }
+                    }
+            }
+    }
+
+    /// Filtered from the search bar input
+    private var filteredTyres: [String: [String: [String: [String: [[Tyre]]]]]] {
+        let search = searchBar.trimmingCharacters(in: .whitespacesAndNewlines)
+        let filtered = filterTyres(with: search)
+        return groupTyres(filtered)
     }
 
     // Adds a new tyre to the specified category
@@ -225,7 +248,7 @@ struct TyreCardView: View {
 
             HStack(alignment: .top) {
                 // Tyre specifications
-                Text("\(tyre.width)/\(tyre.profile)R\(tyre.rimSize) \(tyre.speedRating)")
+                Text("\(tyre.width)/\(tyre.profile)/\(tyre.rimSize) \(tyre.speedRating)")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
                     .lineLimit(2)
@@ -312,7 +335,7 @@ struct TyreCardView: View {
         let context = container.mainContext
 
         // Premium category
-        let premiumTyre1 = Tyre(width: "225", profile: "45", rimSize: "18", brand: "Michelisdgdsfgdsgsdfgsdfgsdfgsdfgsdfgsdfgn", model: "Pilot Sport 4", speedRating: "Y", price: 120.99, isWinter: true, category: "Premium")
+        let premiumTyre1 = Tyre(width: "225", profile: "45", rimSize: "18", brand: "Michelin", model: "Pilot Sport 4", speedRating: "Y", price: 120.99, isWinter: true, category: "Premium")
         let premiumTyre2 = Tyre(width: "245", profile: "40", rimSize: "19", brand: "Bridgestone", model: "Potenza", speedRating: "W", price: 135.50, isWinter: false, category: "Premium")
         let premiumWinter = Tyre(width: "225", profile: "45", rimSize: "18", brand: "Continental", model: "WinterContact", speedRating: "H", price: 145.99, isWinter: true, category: "Premium")
 
