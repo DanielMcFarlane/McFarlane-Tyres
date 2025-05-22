@@ -114,7 +114,7 @@ struct DisplayAllOrdersView: View {
                                             }
                                         }
                                         .padding()
-                                        .background(Color(UIColor.systemGray6))
+                                        .background(Color(UIColor { $0.userInterfaceStyle == .dark ? .systemGray6 : .white }))
                                         .cornerRadius(12)
                                         .shadow(color: .black.opacity(0.12), radius: 5, x: 0, y: 2)
                                     }
@@ -185,13 +185,12 @@ struct DisplayAllOrdersView: View {
                                                         }
                                                     }
                                                     .padding(.horizontal)
-                                                    .background(Color(UIColor.secondarySystemBackground))
                                                     .cornerRadius(8)
                                                 }
                                             }
                                         }
                                         .padding()
-                                        .background(Color(UIColor.systemGray6))
+                                        .background(Color(UIColor { $0.userInterfaceStyle == .dark ? .systemGray6 : .white }))
                                         .cornerRadius(12)
                                         .shadow(color: .black.opacity(0.12), radius: 5, x: 0, y: 2)
                                     }
