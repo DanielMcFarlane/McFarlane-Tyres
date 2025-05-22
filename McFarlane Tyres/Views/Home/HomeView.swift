@@ -1,6 +1,6 @@
 //
 //  HomeView.swift
-//  McFarlane's Tyres
+//  McFarlane Tyres
 //
 //  Created by Daniel McFarlane on 25/04/2025.
 //
@@ -43,7 +43,7 @@ struct HomeView: View {
                     VStack(spacing: 30) {
                         // Logo
                         VStack(alignment: .trailing, spacing: -16) {
-                            Text("MCFARLANE'S")
+                            Text("MCFARLANE")
                                 .font(.custom("AvenirNext-Bold", size: 44))
                                 .foregroundColor(Color.primary)
                                 .italic()

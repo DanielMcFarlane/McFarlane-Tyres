@@ -5,12 +5,12 @@ Please note that this project has been altered to ensure the anonymity of sensit
 
 ---
 
-# McFarlane's Tyres  
+# McFarlane Tyres  
 ## HND Software Development Graded Unit
 
-McFarlane’s Tyres is a tyre ordering and management app built using Swift developed as part of my Graded Unit project. The application showcases a thorough understanding of Object-Oriented Programming principles, SwiftUI design and persistent data storage through SwiftData.
+McFarlane Tyres is a tyre ordering and management app built using Swift developed as part of my Graded Unit project. The application showcases a thorough understanding of Object-Oriented Programming principles, SwiftUI design and persistent data storage through SwiftData.
 
-The McFarlane's Tyres app was built on a solid foundation established during the analysis and design stages. Clear system modelling guided the app’s development. Key design choices included setting up class hierarchies for the data models, using manager classes to keep different parts of the code organised and building the user interface with a modular SwiftUI structure. Together, these elements ensure the app delivers a smooth and user-friendly experience.
+The McFarlane Tyres app was built on a solid foundation established during the analysis and design stages. Clear system modelling guided the app’s development. Key design choices included setting up class hierarchies for the data models, using manager classes to keep different parts of the code organised and building the user interface with a modular SwiftUI structure. Together, these elements ensure the app delivers a smooth and user-friendly experience.
 
 The app offers a tailored experience depending on the user’s role, with admins granted full control over the system and staff limited to viewing orders. Customers are able to search for and order tyres, manage their accounts and review their past orders. Behind the scenes, more complex features like password hashing, a filtered search, dynamic views and database seeding were handled using a well-structured architecture designed to be clean, reusable and easy to test.
 
