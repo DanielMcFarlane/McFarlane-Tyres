@@ -1,6 +1,6 @@
 //
 //  EditTyreView.swift
-//  McFarlane's Tyres
+//  McFarlane Tyres
 //
 //  Created by Daniel McFarlane on 25/04/2025.
 //
