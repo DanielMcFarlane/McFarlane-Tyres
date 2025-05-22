@@ -30,7 +30,7 @@ struct AddTyreView: View {
     let speedRatings = ["H", "T", "V", "W", "Y", "Z"]
     let categories = ["Economy", "Midrange", "Premium"]
 
-    // Initializer to set the selected category
+    // Initialiser to set the selected category
     init(category: String) {
         _selectedCategory = State(initialValue: category)
     }

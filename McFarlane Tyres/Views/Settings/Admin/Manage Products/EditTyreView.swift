@@ -31,7 +31,7 @@ struct EditTyreView: View {
     let speedRatings = ["H", "T", "V", "W", "Y", "Z"]
     let categories = ["Economy", "Midrange", "Premium"]
 
-    // Initializer to set up the tyre details
+    // Initialiser to set up the tyre details
     init(tyre: Tyre) {
         self.tyre = tyre
         _brand = State(initialValue: tyre.brand)

@@ -1,6 +1,6 @@
 //
 //  ManageProductsView.swift
-//  McFarlane Tyres
+//  McFarlane's Tyres
 //
 //  Created by Daniel McFarlane on 25/04/2025.
 //
@@ -57,7 +57,13 @@ struct ManageProductsView: View {
                                                 DisclosureGroup("Speed Rating: \(speedRating)") {
                                                     ForEach(filteredTyres[category]?[rimSize]?[profile]?[speedRating] ?? [], id: \.self) { widthTyres in
                                                         ForEach(widthTyres, id: \.self) { tyre in
-                                                            TyreCardView(tyre: tyre)
+                                                            HStack {
+                                                                TyreCardView(tyre: tyre)
+                                                                    .frame(maxWidth: .infinity, alignment: .center)
+                                                            }
+                                                            .listRowInsets(EdgeInsets(top: 0, leading: -30, bottom: 0, trailing: 30))
+                                                            .listRowSeparator(.hidden)
+                                                            .shadow(color: .black.opacity(0.06), radius: 5, x: 0, y: 0)
                                                         }
                                                     }
                                                 }
@@ -269,11 +275,15 @@ struct TyreCardView: View {
                     Text("Edit")
                         .font(.caption)
                         .foregroundColor(.blue)
+                        .frame(minWidth: 60)
                         .padding(.horizontal, 12)
                         .padding(.vertical, 6)
                         .background(Color.blue.opacity(0.1))
                         .cornerRadius(8)
                 }
+                .buttonStyle(PlainButtonStyle())
+                .simultaneousGesture(TapGesture())
+                .allowsHitTesting(true)
 
                 Spacer()
 
@@ -284,11 +294,15 @@ struct TyreCardView: View {
                     Text("Delete")
                         .font(.caption)
                         .foregroundColor(.red)
+                        .frame(minWidth: 60)
                         .padding(.horizontal, 12)
                         .padding(.vertical, 6)
                         .background(Color.red.opacity(0.1))
                         .cornerRadius(8)
                 }
+                .buttonStyle(PlainButtonStyle())
+                .simultaneousGesture(TapGesture())
+                .allowsHitTesting(true)
                 .alert("Confirm Deletion", isPresented: $showingDeleteConfirmation) {
                     Button("Cancel", role: .cancel) { }
                     Button("Delete", role: .destructive) {
@@ -308,6 +322,7 @@ struct TyreCardView: View {
         .shadow(color: Color.black.opacity(0.05), radius: 3, x: 0, y: 1)
         .padding(.horizontal, 4)
         .padding(.vertical, 4)
+        .contentShape(Rectangle())
         .onAppear {
             if tyreManager == nil {
                 tyreManager = TyreManager(context: modelContext)
