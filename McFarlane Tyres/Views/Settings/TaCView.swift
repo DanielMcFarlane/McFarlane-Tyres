@@ -1,5 +1,5 @@
 //
-//  TermsOfServiceView.swift
+//  TaCView.swift
 //  McFarlane's Tyres
 //
 //  Created by Daniel McFarlane on 25/04/2025.
@@ -15,7 +15,7 @@ struct Term {
     let content: String
 }
 
-struct TermsOfServiceView: View {
+struct TaCView: View {
     @Environment(\.colorScheme) var colorScheme
 
     private let termsItems = [
@@ -115,5 +115,5 @@ struct TermsItem: View {
 }
 
 #Preview {
-    TermsOfServiceView()
+    TaCView()
 }

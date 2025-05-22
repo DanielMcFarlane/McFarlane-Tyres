@@ -67,7 +67,7 @@ struct SettingsView: View {
                     OrdersView()
                 } label: {
                     Text("Order History")
-                        .padding(.vertical, 10)
+                        .padding(.vertical, 8)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
 
@@ -75,7 +75,7 @@ struct SettingsView: View {
                     ChangePasswordView(loggedInUser: user)
                 } label: {
                     Text("Change Password")
-                        .padding(.vertical, 10)
+                        .padding(.vertical, 8)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
@@ -90,7 +90,7 @@ struct SettingsView: View {
                     DisplayAllUsersView()
                 } label: {
                     Text("View All Users")
-                        .padding(.vertical, 10)
+                        .padding(.vertical, 8)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
 
@@ -98,7 +98,7 @@ struct SettingsView: View {
                     DisplayAllOrdersView()
                 } label: {
                     Text("View All Orders")
-                        .padding(.vertical, 10)
+                        .padding(.vertical, 8)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
 
@@ -106,7 +106,7 @@ struct SettingsView: View {
                     ManageProductsView()
                 } label: {
                     Text("Manage Products")
-                        .padding(.vertical, 10)
+                        .padding(.vertical, 8)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
 
@@ -114,7 +114,7 @@ struct SettingsView: View {
                     AddUserView()
                 } label: {
                     Text("Add User")
-                        .padding(.vertical, 10)
+                        .padding(.vertical, 8)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
             } else {
@@ -122,7 +122,7 @@ struct SettingsView: View {
                     DisplayAllOrdersView()
                 } label: {
                     Text("View All Orders")
-                        .padding(.vertical, 10)
+                        .padding(.vertical, 8)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
@@ -138,7 +138,7 @@ struct SettingsView: View {
             } label: {
                 Text("Generate Sample Orders")
                     .foregroundColor(.accentColor)
-                    .padding(.vertical, 10)
+                    .padding(.vertical, 8)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
             .alert("Are you sure you want to generate sample orders?", isPresented: $showGenerateConfirmation) {
@@ -154,7 +154,7 @@ struct SettingsView: View {
             } label: {
                 Text("Clear All Orders")
                     .foregroundColor(.red)
-                    .padding(.vertical, 10)
+                    .padding(.vertical, 8)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
             .alert("Are you sure you want to delete all orders?", isPresented: $showDeleteConfirmation) {
@@ -170,10 +170,10 @@ struct SettingsView: View {
     private var legalSection: some View {
         Section(header: Text("Legal & Support").font(.headline)) {
             NavigationLink {
-                TermsOfServiceView()
+                TaCView()
             } label: {
-                Text("Terms of Service")
-                    .padding(.vertical, 10)
+                Text("Terms and Conditions")
+                    .padding(.vertical, 8)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
@@ -189,7 +189,7 @@ struct SettingsView: View {
                 } label: {
                     Text("Logout")
                         .foregroundColor(.red)
-                        .padding(.vertical, 10)
+                        .padding(.vertical, 8)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .alert("Are you sure you want to log out?", isPresented: $showLogoutConfirmation) {
@@ -203,7 +203,7 @@ struct SettingsView: View {
                     LoginView()
                 } label: {
                     Text("Login")
-                        .padding(.vertical, 10)
+                        .padding(.vertical, 8)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
