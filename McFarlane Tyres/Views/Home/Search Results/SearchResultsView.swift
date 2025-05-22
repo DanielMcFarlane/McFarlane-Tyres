@@ -9,6 +9,7 @@
 
 import SwiftData
 import SwiftUI
+import UIKit
 
 struct SearchResultsView: View {
     @Environment(\.colorScheme) var colorScheme
@@ -97,6 +98,9 @@ struct SearchResultsView: View {
 
     /// Shows a pop-up notification with the given message
     func showPopUpNotification(message: String) {
+        let generator = UINotificationFeedbackGenerator()
+        generator.notificationOccurred(.success)
+        
         popUpMessage = message
         showingPopUp = true
 
