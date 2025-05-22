@@ -47,6 +47,7 @@ struct SettingsView: View {
                 }
                 .frame(maxHeight: .infinity)
                 .listStyle(InsetGroupedListStyle())
+                .environment(\.defaultMinListRowHeight, 50)
                 .navigationTitle("Settings")
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationBarBackButtonHidden(true)
@@ -67,7 +68,8 @@ struct SettingsView: View {
                     OrdersView()
                 } label: {
                     Text("Order History")
-                        .padding(.vertical, 8)
+                        .font(.body)
+                        .padding(.vertical, 10)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
 
@@ -75,7 +77,8 @@ struct SettingsView: View {
                     ChangePasswordView(loggedInUser: user)
                 } label: {
                     Text("Change Password")
-                        .padding(.vertical, 8)
+                        .font(.body)
+                        .padding(.vertical, 10)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
@@ -90,7 +93,8 @@ struct SettingsView: View {
                     DisplayAllUsersView()
                 } label: {
                     Text("View All Users")
-                        .padding(.vertical, 8)
+                        .font(.body)
+                        .padding(.vertical, 10)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
 
@@ -98,7 +102,8 @@ struct SettingsView: View {
                     DisplayAllOrdersView()
                 } label: {
                     Text("View All Orders")
-                        .padding(.vertical, 8)
+                        .font(.body)
+                        .padding(.vertical, 10)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
 
@@ -106,7 +111,8 @@ struct SettingsView: View {
                     ManageProductsView()
                 } label: {
                     Text("Manage Products")
-                        .padding(.vertical, 8)
+                        .font(.body)
+                        .padding(.vertical, 10)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
 
@@ -114,7 +120,8 @@ struct SettingsView: View {
                     AddUserView()
                 } label: {
                     Text("Add User")
-                        .padding(.vertical, 8)
+                        .font(.body)
+                        .padding(.vertical, 10)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
             } else {
@@ -122,7 +129,8 @@ struct SettingsView: View {
                     DisplayAllOrdersView()
                 } label: {
                     Text("View All Orders")
-                        .padding(.vertical, 8)
+                        .font(.body)
+                        .padding(.vertical, 10)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
@@ -137,8 +145,9 @@ struct SettingsView: View {
                 showGenerateConfirmation = true
             } label: {
                 Text("Generate Sample Orders")
+                    .font(.body)
                     .foregroundColor(.accentColor)
-                    .padding(.vertical, 8)
+                    .padding(.vertical, 10)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
             .alert("Are you sure you want to generate sample orders?", isPresented: $showGenerateConfirmation) {
@@ -153,8 +162,9 @@ struct SettingsView: View {
                 showDeleteConfirmation = true
             } label: {
                 Text("Clear All Orders")
+                    .font(.body)
                     .foregroundColor(.red)
-                    .padding(.vertical, 8)
+                    .padding(.vertical, 10)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
             .alert("Are you sure you want to delete all orders?", isPresented: $showDeleteConfirmation) {
@@ -173,13 +183,14 @@ struct SettingsView: View {
                 TaCView()
             } label: {
                 Text("Terms and Conditions")
-                    .padding(.vertical, 8)
+                    .font(.body)
+                    .padding(.vertical, 10)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
         }
     }
 
-    //  Login/logout section
+    // Login/logout section
     private var authSection: some View {
         Section(header: Text(" ").opacity(0)) {
             if isLoggedIn {
@@ -188,8 +199,9 @@ struct SettingsView: View {
                     showLogoutConfirmation = true
                 } label: {
                     Text("Logout")
+                        .font(.body)
                         .foregroundColor(.red)
-                        .padding(.vertical, 8)
+                        .padding(.vertical, 10)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .alert("Are you sure you want to log out?", isPresented: $showLogoutConfirmation) {
@@ -203,7 +215,8 @@ struct SettingsView: View {
                     LoginView()
                 } label: {
                     Text("Login")
-                        .padding(.vertical, 8)
+                        .font(.body)
+                        .padding(.vertical, 10)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
@@ -310,5 +323,5 @@ struct SettingsView: View {
 
 #Preview {
     SettingsView()
-        .modelContainer(for: User.self, inMemory: true)
+        .modelContainer(for: [User.self, Tyre.self], inMemory: true)
 }

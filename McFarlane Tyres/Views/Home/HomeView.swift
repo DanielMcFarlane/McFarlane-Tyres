@@ -97,7 +97,7 @@ struct HomeView: View {
                                     .foregroundColor(.white)
                                     .cornerRadius(12)
                             }
-                            .padding(.horizontal, 30)
+                            .padding(.horizontal)
                         }
                         .padding()
                         .background(.ultraThinMaterial.opacity(0.9))
