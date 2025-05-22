@@ -97,7 +97,7 @@ struct SearchCard: View {
                                 Text("-")
                                     .font(.title2)
                                     .frame(width: 32, height: 32)
-                                    .background(Color.gray.opacity(0.2))
+//                                    .background(Color.gray.opacity(0.2))
                                     .foregroundColor(.primary)
                                     .cornerRadius(6)
                             }
@@ -117,7 +117,7 @@ struct SearchCard: View {
                                 Text("+")
                                     .font(.title2)
                                     .frame(width: 32, height: 32)
-                                    .background(Color.gray.opacity(0.2))
+//                                    .background(Color.gray.opacity(0.2))
                                     .foregroundColor(.primary)
                                     .cornerRadius(6)
                             }
