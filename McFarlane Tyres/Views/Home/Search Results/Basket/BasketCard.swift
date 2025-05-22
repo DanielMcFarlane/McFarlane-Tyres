@@ -59,16 +59,27 @@ struct BasketCard: View {
                     Spacer()
 
                     HStack(spacing: 4) {
+                        // Minus button or trash icon
                         Button(action: {
-                            // Minus button
-                            if quantity > 0 { quantity -= 1 }
+                            if quantity > 1 {
+                                quantity -= 1
+                            } else {
+                                onRemove()
+                            }
                         }) {
-                            Text("-")
-                                .font(.title2)
-                                .frame(width: 32, height: 32)
-                                .background(Color.gray.opacity(0.2))
-                                .cornerRadius(6)
+                            Image(systemName: quantity == 1 ? "trash" : "")
+                                .font(quantity == 1 ? .headline : .title2)
+                                .foregroundColor(.primary)
+                            if quantity > 1 {
+                                Text("-")
+                                    .font(.title2)
+                                    .foregroundColor(.primary)
+                            }
                         }
+                        .frame(width: 32, height: 32)
+//                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(6)
+                        
                         // Quantity
                         Text("\(quantity)")
                             .font(.headline)
@@ -82,27 +93,10 @@ struct BasketCard: View {
                         }) {
                             Text("+")
                                 .font(.title2)
+                                .foregroundColor(.primary)
                                 .frame(width: 32, height: 32)
-                                .background(Color.gray.opacity(0.2))
+//                                .background(Color.gray.opacity(0.2))
                                 .cornerRadius(6)
-                        }
-                    }
-                }
-
-                if quantity == 0 {
-                    HStack {
-                        Spacer()
-
-                        Button(action: {
-                            // Remove button
-                            onRemove()
-                        }) {
-                            Text("Remove Item")
-                                .font(.headline)
-                                .foregroundColor(.secondary)
-                                .padding(.horizontal, 6)
-                                .padding(.top, 12)
-                                .padding(.bottom, 12)
                         }
                     }
                 }
@@ -117,7 +111,7 @@ struct BasketCard: View {
 
 #Preview {
     @Previewable @State var quantity1: Int = 2
-    @Previewable @State var quantity2: Int = 0
+    @Previewable @State var quantity2: Int = 1
 
     let sampleTyre1 = Tyre(
         width: "205",
