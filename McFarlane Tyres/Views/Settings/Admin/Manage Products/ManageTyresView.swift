@@ -114,8 +114,25 @@ struct ManageTyresView: View {
             return tyres
         }
 
+        /// Checks if a text has a prefix
         func prefixSearch(_ text: String, prefix: String) -> Bool {
             text.lowercased().hasPrefix(prefix)
+        }
+
+        /// Checks if a word is a prefix in the tyre fields
+        func wordMatchesTyrePrefix(_ word: String, tyre: Tyre) -> Bool {
+            prefixSearch(tyre.brand, prefix: word) ||
+                prefixSearch(tyre.model, prefix: word) ||
+                tyre.width.lowercased().hasPrefix(word) ||
+                tyre.profile.lowercased().hasPrefix(word) ||
+                tyre.rimSize.lowercased().hasPrefix(word) ||
+                prefixSearch(tyre.speedRating, prefix: word) ||
+                (word == "winter" && tyre.isWinter)
+        }
+
+        /// Checks if all words in the search are prefixes in the tyre fields
+        func allWordsMatchPrefix(_ words: [String], tyre: Tyre) -> Bool {
+            words.allSatisfy { wordMatchesTyrePrefix($0, tyre: tyre) }
         }
 
         if search.contains("/") {
@@ -172,14 +189,10 @@ struct ManageTyresView: View {
                 }
             }
         } else {
-            return tyres.filter {
-                prefixSearch($0.brand, prefix: search) ||
-                    prefixSearch($0.model, prefix: search) ||
-                    $0.width.hasPrefix(search) ||
-                    $0.profile.hasPrefix(search) ||
-                    $0.rimSize.hasPrefix(search) ||
-                    prefixSearch($0.speedRating, prefix: search) ||
-                    (search.contains("winter") && $0.isWinter)
+            let searchWords = search.split(separator: " ").map(String.init)
+
+            return tyres.filter { tyre in
+                allWordsMatchPrefix(searchWords, tyre: tyre)
             }
         }
     }
