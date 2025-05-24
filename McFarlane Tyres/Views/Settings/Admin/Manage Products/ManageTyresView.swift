@@ -1,5 +1,5 @@
 //
-//  ManageProductsView.swift
+//  ManageTyresView.swift
 //  McFarlane's Tyres
 //
 //  Created by Daniel McFarlane on 25/04/2025.
@@ -10,7 +10,7 @@
 import SwiftData
 import SwiftUI
 
-struct ManageProductsView: View {
+struct ManageTyresView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.colorScheme) var colorScheme
 
@@ -368,7 +368,7 @@ struct TyreCardView: View {
         context.insert(economyWinter)
         context.insert(midRangeTyre)
 
-        return ManageProductsView()
+        return ManageTyresView()
             .modelContainer(container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")

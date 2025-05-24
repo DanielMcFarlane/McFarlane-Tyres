@@ -90,15 +90,6 @@ struct SettingsView: View {
         Section(header: Text(isAdmin ? "Admin Controls" : "Staff Controls").font(.headline)) {
             if isAdmin {
                 NavigationLink {
-                    DisplayAllUsersView()
-                } label: {
-                    Text("View All Users")
-                        .font(.body)
-                        .padding(.vertical, 10)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                }
-
-                NavigationLink {
                     DisplayAllOrdersView()
                 } label: {
                     Text("View All Orders")
@@ -108,14 +99,23 @@ struct SettingsView: View {
                 }
 
                 NavigationLink {
-                    ManageProductsView()
+                    ManageTyresView()
                 } label: {
                     Text("Manage Products")
                         .font(.body)
                         .padding(.vertical, 10)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
-
+                
+                NavigationLink {
+                    DisplayAllUsersView()
+                } label: {
+                    Text("View All Users")
+                        .font(.body)
+                        .padding(.vertical, 10)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                
                 NavigationLink {
                     AddUserView()
                 } label: {
