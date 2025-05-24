@@ -101,7 +101,7 @@ struct SettingsView: View {
                 NavigationLink {
                     ManageTyresView()
                 } label: {
-                    Text("Manage Products")
+                    Text("Manage Tyres")
                         .font(.body)
                         .padding(.vertical, 10)
                         .frame(maxWidth: .infinity, alignment: .leading)
