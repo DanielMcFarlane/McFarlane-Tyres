@@ -4,7 +4,7 @@
 //
 //  Created by Daniel McFarlane on 25/04/2025.
 //
-//  This view allows admins to manage products.
+//  This view allows admins to manage tyres.
 //
 
 import SwiftData
@@ -94,7 +94,7 @@ struct ManageTyresView: View {
                 }
             }
             .listStyle(InsetGroupedListStyle())
-            .navigationTitle("Manage Products")
+            .navigationTitle("Manage Tyres")
             .background(Color(.systemGroupedBackground).ignoresSafeArea())
             .sheet(isPresented: $showingAddTyreSheet) {
                 NavigationStack {

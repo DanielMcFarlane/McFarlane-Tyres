@@ -69,13 +69,21 @@ struct LoginView: View {
                             """)
                         #endif
 
-                        // Perform login validation
-                        if loginUser(email: trimmedEmail, password: trimmedPassword) {
-                            dismiss()
-                        } else {
+                        // Validate input with early exit
+                        guard !trimmedEmail.isEmpty, !trimmedPassword.isEmpty else {
+                            errorMessage = "Email and password are required"
                             showError = true
-                            errorMessage = "Invalid credentials"
+                            return
                         }
+
+                        // Validate login with early exit
+                        guard let loginError = loginUser(email: trimmedEmail, password: trimmedPassword) else {
+                            dismiss()
+                            return
+                        }
+
+                        errorMessage = loginError
+                        showError = true
 
                     } label: {
                         // Login button
@@ -86,8 +94,10 @@ struct LoginView: View {
                             .foregroundColor(.white)
                             .cornerRadius(10)
                     }
-                    .alert(errorMessage ?? "Invalid credentials", isPresented: $showError) {
+                    .alert("Login Error", isPresented: $showError) {
                         Button("OK", role: .cancel) { }
+                    } message: {
+                        Text(errorMessage ?? "Something went wrong")
                     }
 
                     Spacer()
@@ -131,46 +141,39 @@ struct LoginView: View {
     // MARK: - Helper Functions
 
     /// This function handles the login process by checking the user's credentials
-    private func loginUser(email: String, password: String) -> Bool {
-        if let user = users.first(where: { $0.email == email }) {
-            let components = user.password.split(separator: "$") // Split the stored password into salt and hash
-            
-            // Early exit if the password format is incorrect
-            guard components.count == 2,
-                  let salt = components.first,
-                  let storedHash = components.last else {
-                return false
-            }
-
-            // Recreate the hash using the entered password and the stored salt
-            let input = "\(salt)\(password)"
-            let recreatedHash = SHA256.hash(data: Data(input.utf8))
-                .compactMap { String(format: "%02x", $0) }
-                .joined()
-
-            // Compare the recreated hash with the stored hash
-            if recreatedHash == storedHash {
-                let basketManager = BasketManager(context: context)
-                
-                for user in users where user.loggedIn {
-                    basketManager.clearBasket(for: user)
-                }
-                
-                for index in users.indices {
-                    users[index].loggedIn = false
-                }
-                
-                user.loggedIn = true
-
-                if user.email == "admin" {
-                    user.isAdmin = true
-                }
-
-                try? context.save()
-                return true
-            }
+    private func loginUser(email: String, password: String) -> String? {
+        // Early exit if the email doesn't exist in database
+        guard let user = users.first(where: { $0.email == email }) else {
+            return "No account found with this email"
         }
-        return false
+
+        let components = user.password.split(separator: "$") // Split the stored password into salt and hash
+
+        // Early exit if the password format is incorrect
+        guard components.count == 2,
+              let salt = components.first,
+              let storedHash = components.last else {
+            return "Incorrect password"
+        }
+
+        // Recreate the hash using the entered password and the stored salt
+        let input = "\(salt)\(password)"
+        let recreatedHash = SHA256.hash(data: Data(input.utf8))
+            .compactMap { String(format: "%02x", $0) }
+            .joined()
+
+        // Compare the recreated hash with the stored hash
+        if recreatedHash == storedHash {
+            user.loggedIn = true
+
+            if user.email == "admin" {
+                user.isAdmin = true
+            }
+            
+            try? context.save()
+            return nil
+        }
+        return "Incorrect password"
     }
 
     private func hideKeyboard() {
