@@ -16,6 +16,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		6523C71B2DE7605E0089326A /* Screenshots */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Screenshots;
+			sourceTree = "<group>";
+		};
 		6597B2312DBBCE9000E1DB9B /* McFarlane Tyres */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "McFarlane Tyres";
@@ -37,6 +42,7 @@
 		6597B2262DBBCE9000E1DB9B = {
 			isa = PBXGroup;
 			children = (
+				6523C71B2DE7605E0089326A /* Screenshots */,
 				6597B2962DBBCF2100E1DB9B /* README.md */,
 				6597B2312DBBCE9000E1DB9B /* McFarlane Tyres */,
 				6597B2302DBBCE9000E1DB9B /* Products */,
@@ -67,6 +73,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				6523C71B2DE7605E0089326A /* Screenshots */,
 				6597B2312DBBCE9000E1DB9B /* McFarlane Tyres */,
 			);
 			name = "McFarlane Tyres";
