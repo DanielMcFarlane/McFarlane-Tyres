@@ -1,12 +1,7 @@
----
-### Disclaimer
-
-Please note that this project has been altered to ensure the anonymity of sensitive information. Any specific details such as names, locations and other identifiable data have been modified to preserve privacy and confidentiality. The modifications do not affect the core functionality or purpose of the application.
-
----
-
 # McFarlane Tyres  
 ## HND Software Development Graded Unit
+
+### Overview
 
 McFarlane Tyres is a tyre ordering and management app built using Swift developed as part of my Graded Unit project. The application showcases a thorough understanding of Object-Oriented Programming principles, SwiftUI design and persistent data storage through SwiftData.
 
@@ -77,3 +72,57 @@ Additional seeded user accounts are available for testing. You can refer to the 
 - `Views/` – SwiftUI screens and UI components  
 - `Shared/` – Reusable UI components: cards, taskbars and other common elements  
 - `Seeding/` – Contains `DefaultTyreData` and `DefaultUserData` to populate the initial database
+
+---
+
+### Screenshots
+
+#### Home
+The main dashboard offering quick access to all core sections of the app. Users can easily navigate to search tyres, view their basket or access their account from this view.
+
+<div>
+  <img src="Screenshots/Home.png" alt="Home View" width="250"/>
+</div>
+
+#### Search & Basket  
+A streamlined interface for searching tyres using detailed filters such as width, profile, rim size and speed rating. Users can add tyres to their basket which triggers a confirmation pop-up and haptic feedback.
+The basket view adapts depending on whether the user is logged in or logged out allowing logged-in users to manage their selected items, modify quantities and proceed to checkout, while guests have a limited view.
+
+<div>
+  <img src="Screenshots/Search_and_add_to_basket.png" alt="Search and Add to Basket" width="250"/>
+  <img src="Screenshots/Basket_logged_out.png" alt="Basket Logged Out" width="250"/>
+  <img src="Screenshots/Basket_logged_in.png" alt="Basket Logged In" width="250"/>
+</div>
+
+#### Checkout  
+A clear, step-by-step process for finalising tyre orders. This view guides users through confirming order details, selecting fitting dates and completing payment ensuring a smooth user experience.
+
+<div>
+  <img src="Screenshots/Checkout_view.png" alt="Checkout View" width="250"/>
+  <img src="Screenshots/Order_confirmation.png" alt="Order Confirmation" width="250"/>
+</div>
+
+#### Customer Account  
+A personalised view where customers can review their order history, track current orders and change passwords.
+
+<div>
+  <img src="Screenshots/Customer_settings.png" alt="Customer Settings" width="250"/>
+  <img src="Screenshots/Orders.png" alt="Orders" width="250"/>
+</div>
+
+#### Staff Account  
+A personalised view extending the customer account. Staff can view orders but do not have access to sensitive administrative controls.
+
+<div>
+  <img src="Screenshots/Staff_settings.png" alt="Staff Settings" width="250"/>
+  <img src="Screenshots/All_orders.png" alt="All Orders" width="250"/>
+</div>
+
+#### Admin Dashboard  
+A comprehensive control panel for administrators featuring full system management capabilities. Admins can oversee users, add new users while assigning roles, manage tyre inventories and configure system settings to maintain smooth operations.
+
+<div>
+  <img src="Screenshots/Admin_settings.png" alt="Admin Settings" width="250"/>
+  <img src="Screenshots/Manage_tyres.png" alt="Manage Tyres" width="250"/>
+  <img src="Screenshots/Add_user.png" alt="Add User" width="250"/>
+</div>
